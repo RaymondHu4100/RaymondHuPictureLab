@@ -258,9 +258,74 @@ public class Picture extends SimplePicture
       }
     }
   }
-  
-  
-  /* Main method for testing - each class in Java can have a main 
+
+  public int getCountRedOverValue(int value)
+  {
+    int count = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel current = null;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = 0; col < pixels[0].length; col++)
+      {
+        current = pixels[row][col];
+        if (current.getRed()>value)
+        {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  public void setRedToHalfValueInTopHalf()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel current = null;
+    for (int row = 0; row < pixels.length / 2; row++)
+    {
+      for (int col = 0; col < pixels[0].length; col++)
+      {
+        current = pixels[row][col];
+        current.setRed(current.getRed()/2);
+      }
+    }
+  }
+
+  public void clearBlueOverValue(int value)
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel current = null;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = 0; col < pixels[0].length; col++)
+      {
+        current = pixels[row][col];
+        if (current.getBlue() > value)
+        {
+          current.setBlue(0);
+        }
+      }
+    }
+  }
+
+  public int[] getAverageForColumn(int col)
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel current = null;
+    int[] average = new int[pixels[col].length];
+    int total = 0;
+
+    for (int row = 0; row < pixels.length; row++)
+    {
+      current = pixels[row][col];
+      total = current.getRed() + current.getGreen() + current.getBlue();
+      average[row] = total / 3;
+    }
+    return average;
+  }
+
+  /* Main method for testing - each class in Java can have a main
    * method 
    */
   public static void main(String[] args) 
